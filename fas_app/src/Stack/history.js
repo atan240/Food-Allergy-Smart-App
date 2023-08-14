@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { globalStyles } from '../../styles/global_style';
 
 export default function History() {
     return (
-        <View style={globalStyles.container}>
-            <Text style={globalStyles.titleText}>History</Text>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={{fontSize: 26, fontWeight: 'bold'}}>History</Text>
         </View>
-    )
+    );
 }

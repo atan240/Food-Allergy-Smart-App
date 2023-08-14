@@ -1,16 +1,13 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { globalStyles } from '../../styles/global_style';
-import { useNavigation } from '@react-navigation/native'
 
-export default function Home() {
-    const navigation = useNavigation()
+export default function Home({navigation}) {
     return (
-        <View style={globalStyles.container}>
-            <Text style={globalStyles.titleText}>Home Screen</Text>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={{fontSize: 26, fontWeight: 'bold'}}>Home Screen</Text>
             <Text
             onPress={() => navigation.navigate('History')}
             >See history</Text>
         </View>
-    )
+    );
 }

@@ -1,11 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { globalStyles } from '../../styles/global_style';
 
 export default function Scanner_Cam() {
     return (
-        <View style={globalStyles.container}>
-            <Text style={globalStyles.titleText}>Scanner Camera</Text>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={{fontSize: 26, fontWeight: 'bold'}}>Scanner Camera</Text>
         </View>
-    )
+    );
 }

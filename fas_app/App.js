@@ -3,8 +3,11 @@ import 'react-native-gesture-handler';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
+
+//Screens
 import Home from './src/BottomTab/home';
 import Scanner_Cam from './src/BottomTab/scanner_cam';
 import History from './src/Stack/history';
@@ -15,38 +18,55 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
-const Tab = createMaterialBottomTabNavigator()
+// Screen names
+const homeName = 'Home';
+const scannerName = 'Scanner';
+const historyName = 'History';
+const resultsName = 'Results';
+const welcomeName = 'App Guide';
+
+const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 
+
 function TabNavigator() {
   return(
-    <Tab.Navigator>
-      < Tab.Screen name='Home' component={StackNavigator} />
-      < Tab.Screen name='Scanner_Cam' component={Scanner_Cam} />
-    </Tab.Navigator>
-  )
-}
+    <Tab.Navigator
+        initalRouteName={homeName}
+        screenOptions={({route}) => ({
+          tabBarIcon: ({focused, color,size}) => {
+            let iconName;
+            let rn = route.name;
 
-function StackNavigator() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name='HomeScreen' component={Home} />
-      <Stack.Screen name='History' component={History} />      
-      <Stack.Screen name='Scanner_Results' component={Scanner_Results} />      
-      <Stack.Screen name='Welcome' component={Welcome} />      
-    </Stack.Navigator>
-  )
-}
+            if (rn === homeName) {
+              iconName = focused ? 'home' : 'home-outline';
+          } else if (rn === scannerName) {
+              iconName = focused ? 'camera' : 'camera-outline'; 
+          } else if (rn === historyName) {
+              iconName = focused ? 'pie-chart' : 'pie-chart-outline';
+          } else if (rn === welcomeName) {
+              iconName = focused ? 'information-circle' : 'information-circle-outline';
+          }
 
-function DrawerNavigator() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name='HomeScreen' component={Home} />
-      <Drawer.Screen name='History' component={History} />      
-      <Drawer.Screen name='Scanner_Results' component={Scanner_Results} />      
-      <Drawer.Screen name='Welcome' component={Welcome} />      
-    </Drawer.Navigator>
+          return <Ionicons name={iconName} size={size} color={color}/>
+        },
+        })}
+        
+        tabBarOptions={{
+          activeTintColor: 'green',
+          inactiveTintColor: 'grey',
+          labelStyle: {paddingBottom: 10, fontSize: 10},
+          style: {padding: 10, height: 90},
+        }}
+        
+        >
+          <Tab.Screen name={homeName} component={Home}/>
+          <Tab.Screen name={scannerName} component={Scanner_Cam}/>
+          <Tab.Screen name={historyName} component={History}/>
+          <Tab.Screen name={welcomeName} component={Welcome}/>
+
+          </Tab.Navigator>
   )
 }
 
@@ -55,7 +75,5 @@ export default function App() {
     <NavigationContainer>
       <TabNavigator/>
     </NavigationContainer>
-    // <Home />
-    // <Welcome />
   );
 }
