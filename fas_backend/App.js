@@ -3,12 +3,13 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const port = 1082;
+app.use(cors());
+// app.use(bodyParser.urlencoded())
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
 
-app.use(bodyParser.urlencoded())
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const dotenv = require("dotenv");
@@ -22,8 +23,8 @@ if (result.error) {
 const db = require("./config/db");
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
-app.use(cors());
-app.use(express.json());
+
+// app.use(express.json());
 
 
 app.get("/", (req, res) => res.status(200).send("version 0.01!"));

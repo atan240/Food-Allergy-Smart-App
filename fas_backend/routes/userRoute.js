@@ -1,12 +1,19 @@
+const express = require("express");
 const router = require("express").Router();
-
+const app = express();
 const User = require("../models/User");
+const cors = require('cors');
 
+app.use(cors()) 
 
 var jwt = require("jsonwebtoken");
 
 router.get("/", (req, res) => {
-  res.send("sending private data 1");
+  User.find()
+  .then((users)=> {
+    res.send(users);
+  }) 
+  
 });
 
 // Please add some APIs for CRUD operations
@@ -66,6 +73,7 @@ router.put("/:userUid", (req, res) => {
 // authenticate a user by email and password (token)
 // request url: /user/authenticateUser
 router.route("/authenticate").post((req, res) => {
+  console.log('s',req)
   const email = req.body.email;
   const password = req.body.password;
   console.log("here");
@@ -84,15 +92,17 @@ router.route("/authenticate").post((req, res) => {
             
             res.header("auth-token", "token").json({
               val: "User logged in successfully",
-              token: "token",
+              token: email,
 
             });
           
           
         } else {
+          console.log('not credentials')
           res.json({ val: "Invalid credentials" });
         }
       } else {
+        console.log('not exist')
         res.json({ val: "user does not exist" });
       }
     })

@@ -7,6 +7,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 
 import Home from './src/BottomTab/home';
 import Scanner_Cam from './src/BottomTab/scanner_cam';
+import Login from './src/BottomTab/login';
 import History from './src/Stack/history';
 import Scanner_Results from './src/Stack/scanner_results';
 import Welcome from './src/Stack/welcome';
@@ -24,6 +25,8 @@ function TabNavigator() {
     <Tab.Navigator>
       < Tab.Screen name='Home' component={StackNavigator} />
       < Tab.Screen name='Scanner_Cam' component={Scanner_Cam} />
+      < Tab.Screen name='Login' component={Login} />
+
     </Tab.Navigator>
   )
 }
