@@ -83,8 +83,8 @@ router.route("/authenticate").post((req, res) => {
     .then((user) => {
       // user exists
       if (user !== null) {
-        console.log(password);
-        console.log(user.password);
+        // console.log(password);
+        // console.log(user.password);
         if (password === user.password) {
           
             // generate a token for user
@@ -92,8 +92,8 @@ router.route("/authenticate").post((req, res) => {
             
             res.header("auth-token", "token").json({
               val: "User logged in successfully",
-              token: email,
-
+              email: email,
+              allergen: user.allergen
             });
           
           

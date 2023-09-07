@@ -1,6 +1,9 @@
 import React from 'react';
 import 'react-native-gesture-handler';
 
+import store from './src/redux/store'
+import { Provider } from 'react-redux'
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -55,10 +58,15 @@ function DrawerNavigator() {
 
 export default function App() {
   return (
+
+   
     <NavigationContainer>
+       <Provider store={store}>
       <TabNavigator/>
+      </Provider>
     </NavigationContainer>
     // <Home />
     // <Welcome />
+    // </Provider>
   );
 }
